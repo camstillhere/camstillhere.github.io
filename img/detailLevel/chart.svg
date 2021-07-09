@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 45 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>Chart</title>
+	<defs>
+        <linearGradient x1="15.6881593%" y1="-12.332927%" x2="96.8508849%" y2="122.885703%" id="paperCupGradient">
+            <stop stop-color="#a27250" offset="0%"></stop>
+            <stop stop-color="#6f4e37" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="15.6881593%" y1="-12.332927%" x2="96.8508849%" y2="122.885703%" id="paperSleeveGradient">
+            <stop stop-color="#805a3f" offset="0%"></stop>
+            <stop stop-color="#5e422f" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="15.6881593%" y1="-12.332927%" x2="96.8508849%" y2="122.885703%" id="cap">
+            <stop stop-color="#3c2a1e" offset="0%"></stop>
+            <stop stop-color="#4d3626" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+	<path id="first" fill="url(#cap)" stroke="url(#cap)" fill-opacity="0.5" stroke-opacity="0.8" d="
+		M5,65
+		L10,65
+		L10,90
+		L5,90
+		Z"
+	/>
+	<path id="second" fill="url(#paperSleeveGradient)" stroke="url(#paperSleeveGradient)" fill-opacity="0.5" stroke-opacity="0.8" d="
+		M15,45
+		L20,45
+		L20,90
+		L15,90
+		Z"
+	/>
+	
+	<path id="secondagain" fill="url(#paperSleeveGradient)" stroke="url(#paperSleeveGradient)" fill-opacity="0.5" stroke-opacity="0.8" d="
+		M25,45
+		L30,45
+		L30,90
+		L25,90
+		Z"
+	/>
+	
+	<path id="third" fill="url(#paperCupGradient)" stroke="url(#paperCupGradient)" fill-opacity="0.5" stroke-opacity="0.8" d="
+		M35,25
+		L40,25
+		L40,90
+		L35,90
+		Z"
+	/>
+	
+	
+	<path id="fourth" fill="url(#paperCupGradient)" stroke="url(#paperCupGradient)" fill-opacity="0.5" stroke-opacity="0.8" d="
+		M45,5
+		L50,5
+		L50,90
+		L45,90
+		Z"
+	/>
+
+</svg>

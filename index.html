@@ -1,8 +1,75 @@
 <html>
+<!-- This site was designed by Cameron Stiller for Cameron Stiller, all rights belong to him. -->
 <head>
-<title>First Test</title>
+	<title>Cameron Stiller</title>
+	<script type="text/javascript" src="js/resume.js?1"></script>
+	<script type="text/javascript" src="js/app.js?1"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.js"></script>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/resume.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-Testing testing 1,2 3,4
+<div id="mainPage" class="detail-level-3">
+	<div id="rightSide">
+		<div id="profileContainer">
+			<div id="profilePic"></div>
+			<div id="profileName"><span id="bio-first"></span> <span id="bio-last"></span></div>
+			<div id="profileTitle"></div>
+		</div>
+		<div id="contactSection">
+			<ul id="contactDetails">
+			</ul>
+		</div>
+		<div id="scrollContainer">
+		</div>
+	</div>
+	<div id="paper">
+		<div id="Settings">
+			<label>
+			  <input type="radio" name="setting" value="0">
+			  <img src="img/detailLevel/hot_drink_style/0.svg" onclick="adjustDetail(0)">
+			</label>
+			<label>
+			  <input type="radio" name="setting" value="1">
+			  <img src="img/detailLevel/hot_drink_style/1.svg" onclick="adjustDetail(1)">
+			</label>
+			<label>
+			  <input type="radio" name="setting" value="2">
+			  <img src="img/detailLevel/hot_drink_style/2.svg" onclick="adjustDetail(2)">
+			</label>
+			<label>
+			  <input type="radio" name="setting" value="3" checked>
+			  <img src="img/detailLevel/hot_drink_style/3.svg" onclick="adjustDetail(3)">
+			</label>
+			<label>
+			  <input type="radio" name="setting" value="chart">
+			  <img src="img/detailLevel/chart.svg" onclick="adjustDetail('chart')">
+			</label>
+		</div>
+		<h1 id="charts">Overview</h1>
+		<div class="chartContainer">
+			<canvas id="experienceChart"></canvas>
+		</div>
+		<div class="chartContainer">
+			<canvas id="tenureChart"></canvas>
+		</div>
+		<div class="chartContainer">
+			<canvas id="educationChart"></canvas>
+		</div>
+		<div class="chartContainer">
+			<canvas id="referenceChart"></canvas>
+		</div>
+		<h1 class="summary" id="overview-title">Overview</h1>
+		<ul class="blurb" id="overview-blurb"></ul>
+		<div id="experiencesWrapper" class="wrapper">
+			<h1 class="experiences">Experiences</h1>
+		</div>
+		<div id="educationsWrapper" class="wrapper">
+			<h1 class="educations">Education</h1>
+		</div>
+	</div>
+	
+</div>
 </body>
 </html>

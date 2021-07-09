@@ -112,7 +112,8 @@ function initialize(domainWhitelist)
     {
         try
         {
-			var url="configurables/config.json";
+			//var url="configurables/config.json"; //example template
+			var url="https://raw.githubusercontent.com/camstillhere/Resume-Resources/main/configurables/config.json";
 			const urlParams = new URLSearchParams(window.location.search);
 			const configUrl = urlParams.get('config');
 			if(configUrl!=null)

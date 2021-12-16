@@ -29,12 +29,12 @@ function resume_string_to_date(inboundString)
 		return null;
 	}
 	var parts=inboundString.split('-')
-	return new Date(parts[0], parts[1], parts[2]);
+	return new Date(parts[0], parts[1]-1, parts[2]); //month offsets are zero based
 }
 
 function resume_monthsToDuration(totalMonths)
 {
-	durationFriendly="";
+	durationFriendly="Started this month";
 	var diff_years = Math.floor(totalMonths/ 12);
 	var diff_month = totalMonths % 12;
 	if(diff_years > 0)

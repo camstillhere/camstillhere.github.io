@@ -89,3 +89,7 @@ configurables/        settings.json, config.example.json (and your config.json)
 ```
 
 There is a light/dark toggle and a print stylesheet that expands every role, so the browser's "Save as PDF" gives a complete, clean document.
+
+## Licence
+
+The site code (everything in `index.html`, `css/` and `js/`) is released under the [MIT licence](LICENSE), so you can fork it and use it with your own `config.json`. The résumé content, photo and logos referenced by this site's own `settings.json` belong to their owners and are not part of that grant: replace them with your own before publishing.

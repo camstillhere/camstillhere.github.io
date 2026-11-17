@@ -4,10 +4,16 @@
 		"theme": "auto",
 		"fonts": { "body": "Inter", "heading": "Space Grotesk" },
 		"colors": {
-			"primary": "#4f46e5",
-			"accent": "#06b6d4"
+			"primary": "#1e3a8a",
+			"accent": "#0e7490",
+			"dark": { "primary": "#3b82f6", "accent": "#22d3ee" }
 		},
 		"hero": "gradient",
-		"footer": "Built from a single config.json. Fork it and make it yours."
+		"cta": { "label": "Connect on LinkedIn", "href": "https://www.linkedin.com/in/cameronstiller/" },
+		"detailSwitcher": false,
+		"defaultDetail": 2,
+		"collapseOlderThanYears": 10,
+		"sections": { "charts": false },
+		"footer": null
 	}
 }

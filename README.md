@@ -22,6 +22,8 @@ You can also try any config without editing files: `index.html?config=https://ex
 | Key | Purpose |
 | --- | --- |
 | `bio` | `first`, `last`, `title`, optional `tagline`, `image`, and `contact` groups (`email`, `linkedIn`, `github`, `website`, optional `phone`), each a list of `{content, title}`. |
+| `bio` extras | Optional `location` and `highlights` (`[{value, label}]`) replace the default headline numbers. |
+| `principles`, `proofPoints`, `skills` | Optional sections: `{title, items}` for the first two (proof points are `{title, text}`), and `{title, groups:[{name, items}]}` for skills. |
 | `overview` | `title` and `blurb` paragraphs. `{{years}}` is replaced with your years of experience. |
 | `experiences` | One entry per organisation with `positions` (`title`, `span.start`, `span.end`, `blurb`, `responsibilities`, `achievements`). A `null` end means current. |
 | `educations` | One entry per institute with `certifications` (`qualification`, `title`, `span`, `blurb`). |
@@ -62,7 +64,10 @@ Everything is optional; omitted values fall back to the defaults in [`js/config.
 - `fonts`: any [Google Fonts](https://fonts.google.com) family name.
 - `hero`: `gradient`, `solid`, or set `heroImage` for a background photo.
 - `colors`: `primary`, `accent`, `background`, `surface`, `text`, `muted`. The nested `dark` object overrides them in dark mode.
-- `sections`: switch whole sections off.
+- `sections`: switch whole sections off (`stats`, `principles`, `proofPoints`, `skills`, `charts`, `experience`, `education`, `references`).
+- `cta`: `{label, href}` adds a button to the hero.
+- `detailSwitcher` and `defaultDetail` (0 to 3): show or hide the Brief/Full switcher and pick the starting level.
+- `collapseOlderThanYears`: employers that ended longer ago are collapsed by default.
 
 ## Layout
 

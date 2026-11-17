@@ -72,6 +72,7 @@ Everything is optional; omitted values fall back to the defaults in [`js/config.
 - `hero`: `gradient` or `solid`; set `heroImage` for a background photo.
 - `cta`: adds a primary button to the hero.
 - `cvButton`: label of the "Download CV" button (default `Download CV (PDF)`, set `null` to hide). It opens the browser's print dialog using a compact CV layout of about five A4 pages, so choose "Save as PDF". It is always built from your current data, so there is no file to keep up to date.
+- `card`: phones only (default `true`). Adds a digital business card: tap the card icon to open a sheet with **Save to contacts** (downloads a vCard built from your data, with a small contact photo; a `phone` entry is only included if you added one), the phone's native **Share** menu (or **Copy link**), your LinkedIn and email, and a QR code so someone beside you can open your page. Set `false` to turn it off. The QR library is loaded from cdnjs only when the card is opened.
 - `expandedRoles`: how many of the most recent roles start expanded; the rest open on click.
 - `sections`: switch sections off (`stats`, `featured`, `references`, `proofPoints`, `principles`, `skills`, `charts`, `experience`, `education`). Charts are off by default in this site's settings.
 

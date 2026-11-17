@@ -6,6 +6,7 @@ import {
 } from './render.js';
 import { renderCharts } from './charts.js';
 import { el } from './render.js';
+import { setupCard } from './card.js';
 
 function observeReveals() {
   const targets = document.querySelectorAll('.reveal');
@@ -100,6 +101,7 @@ async function start() {
     observeReveals();
     setupNav();
     setupDock(resume, branding);
+    setupCard(resume, branding);
   } catch (err) {
     console.error(err);
     const box = document.getElementById('error');

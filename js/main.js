@@ -1,6 +1,6 @@
 import { loadSettings, loadResume } from './config.js';
 import { applyBranding, toggleTheme } from './branding.js';
-import { renderHero, renderOverview, renderExperience, renderEducation, renderReferences, renderFooter } from './render.js';
+import { renderHero, renderOverview, renderPrinciples, renderProofPoints, renderSkills, renderExperience, renderEducation, renderReferences, renderFooter } from './render.js';
 import { renderCharts } from './charts.js';
 
 function countUp(node) {
@@ -44,13 +44,21 @@ async function start() {
     applyBranding(branding, resume);
 
     const show = branding.sections;
-    renderHero(resume);
+    renderHero(resume, branding);
     renderOverview(resume);
+    const extras = { principles: renderPrinciples, proofPoints: renderProofPoints, skills: renderSkills };
+    Object.entries(extras).forEach(([key, render]) => {
+      if (show[key] && resume[key]) render(resume);
+      else document.getElementById(key).hidden = true;
+    });
     if (show.experience) renderExperience(resume);
     if (show.education) renderEducation(resume);
     if (show.references) renderReferences(resume);
     renderFooter(branding, resume);
 
+    document.body.dataset.detail = branding.defaultDetail;
+    document.querySelectorAll('[data-detail]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.detail === String(branding.defaultDetail))));
+    document.querySelector('.segmented').hidden = !branding.detailSwitcher;
     document.getElementById('stats').hidden = !show.stats;
     document.getElementById('charts').hidden = !show.charts;
     ['experience', 'education', 'references'].forEach((id) => { document.getElementById(`nav-${id}`).hidden = !show[id]; });

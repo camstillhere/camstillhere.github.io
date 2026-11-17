@@ -26,7 +26,11 @@ export const DEFAULT_SETTINGS = {
     hero: 'gradient',
     heroImage: null,
     footer: null,
-    sections: { stats: true, charts: true, experience: true, education: true, references: true },
+    cta: null,
+    detailSwitcher: true,
+    defaultDetail: 3,
+    collapseOlderThanYears: 10,
+    sections: { stats: true, principles: true, proofPoints: true, skills: true, charts: true, experience: true, education: true, references: true },
     chartPalette: ['#4f46e5', '#06b6d4', '#f59e0b', '#10b981', '#ec4899', '#8b5cf6', '#ef4444', '#14b8a6', '#f97316', '#3b82f6'],
   },
 };
@@ -62,7 +66,7 @@ export async function loadSettings() {
 }
 
 export async function loadResume(settings) {
-  return normalise(await loadJson(settings.config), settings.branding.chartPalette);
+  return normalise(await loadJson(settings.config), settings.branding);
 }
 
 function normaliseGroup(entries, organisations, listKey) {
@@ -100,7 +104,8 @@ function normaliseGroup(entries, organisations, listKey) {
   });
 }
 
-export function normalise(raw, palette) {
+export function normalise(raw, branding) {
+  const palette = branding.chartPalette;
   const organisations = raw.organisations || {};
   Object.keys(organisations).forEach((name, i) => {
     organisations[name].color = palette[i % palette.length];
@@ -108,6 +113,9 @@ export function normalise(raw, palette) {
 
   const experiences = normaliseGroup(raw.experiences || [], organisations, 'positions')
     .sort((a, b) => b.period.end - a.period.end || b.period.start - a.period.start);
+  const cutoff = new Date();
+  cutoff.setFullYear(cutoff.getFullYear() - branding.collapseOlderThanYears);
+  experiences.forEach((org) => { org.older = !org.period.current && org.period.end < cutoff; });
   const educations = normaliseGroup(raw.educations || [], organisations, 'certifications')
     .sort((a, b) => b.period.end - a.period.end);
   educations.forEach((org) => org.certifications.forEach((c) => { c.qualification = titleCase(c.qualification); }));
@@ -135,11 +143,14 @@ export function normalise(raw, palette) {
     educations,
     references,
     organisations,
-    stats: {
-      years,
-      organisations: experiences.length,
-      certifications: educations.reduce((n, o) => n + o.certifications.length, 0),
-      references: references.length,
-    },
+    principles: raw.principles,
+    proofPoints: raw.proofPoints,
+    skills: raw.skills,
+    stats: bio.highlights || [
+      { value: years, label: 'Years in tech' },
+      { value: experiences.length, label: 'Organisations' },
+      { value: educations.reduce((n, o) => n + o.certifications.length, 0), label: 'Qualifications' },
+      { value: references.length, label: 'Endorsements' },
+    ],
   };
 }

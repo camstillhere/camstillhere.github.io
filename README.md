@@ -71,8 +71,13 @@ Everything is optional; omitted values fall back to the defaults in [`js/config.
 - `colors`: `primary` (links), `accent` (rules and highlights), `ink` (hero and feature band), `background`, `surface`, `text`, `muted`. The nested `dark` object overrides them in dark mode.
 - `hero`: `gradient` or `solid`; set `heroImage` for a background photo.
 - `cta`: adds a primary button to the hero.
+- `cvButton`: label of the "Download CV" button (default `Download CV (PDF)`, set `null` to hide). It opens the browser's print dialog using a compact CV layout of about five A4 pages, so choose "Save as PDF". It is always built from your current data, so there is no file to keep up to date.
 - `expandedRoles`: how many of the most recent roles start expanded; the rest open on click.
 - `sections`: switch sections off (`stats`, `featured`, `references`, `proofPoints`, `principles`, `skills`, `charts`, `experience`, `education`). Charts are off by default in this site's settings.
+
+## Link previews
+
+Social networks and chat apps read the static tags in the `<head>` of `index.html`, not the JavaScript-built page. Edit the `title`, `description`, `og:*` and `twitter:*` tags there, and replace `img/preview.png` with a 1200 x 630 image of your own. After publishing, refresh LinkedIn's cache with its Post Inspector.
 
 ## Layout
 

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Résumé</title>
+	<meta name="description" content="An online résumé rendered from a single config.json, with configurable branding.">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+	<script type="module" src="js/main.js"></script>
+</head>
+<body data-detail="3">
+	<header class="topbar">
+		<nav aria-label="Sections">
+			<a href="#overview">Overview</a>
+			<a href="#experience" id="nav-experience">Experience</a>
+			<a href="#education" id="nav-education">Education</a>
+			<a href="#references" id="nav-references">Endorsements</a>
+		</nav>
+		<div class="controls">
+			<div class="segmented" role="group" aria-label="Level of detail">
+				<button data-detail="0" aria-pressed="false" title="Roles only">Brief</button>
+				<button data-detail="1" aria-pressed="false">Summary</button>
+				<button data-detail="2" aria-pressed="false">Highlights</button>
+				<button data-detail="3" aria-pressed="true">Full</button>
+			</div>
+			<button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">◐</button>
+			<button id="printButton" class="icon-button" aria-label="Print or save as PDF">⎙</button>
+		</div>
+	</header>
+
+	<section id="hero" class="hero"></section>
+	<div id="stats" class="stats"></div>
+
+	<main>
+		<p id="error" class="error" role="alert" hidden></p>
+		<section id="overview" class="panel reveal"></section>
+		<section id="charts" class="panel reveal" hidden>
+			<h2>At a glance</h2>
+			<div class="chart-grid">
+				<div class="chart"><canvas id="chartExperience"></canvas></div>
+				<div class="chart"><canvas id="chartTenure"></canvas></div>
+				<div class="chart"><canvas id="chartEducation"></canvas></div>
+				<div class="chart"><canvas id="chartReferences"></canvas></div>
+			</div>
+		</section>
+		<section id="experience" class="panel"></section>
+		<section id="education" class="panel"></section>
+		<section id="references" class="panel"></section>
+	</main>
+
+	<footer id="footer" class="footer"></footer>
+</body>
+</html>

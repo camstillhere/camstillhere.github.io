@@ -1,6 +1,6 @@
 import { cssUrl } from './render.js';
 
-const VARIABLES = ['primary', 'accent', 'background', 'surface', 'text', 'muted'];
+const VARIABLES = ['primary', 'accent', 'ink', 'background', 'surface', 'text', 'muted'];
 
 function cssRule(selector, colors) {
   const lines = VARIABLES.filter((k) => colors[k]).map((k) => `--${k}: ${colors[k]};`);

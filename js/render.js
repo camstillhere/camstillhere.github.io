@@ -57,9 +57,9 @@ export function renderHero(resume, branding) {
   const links = Object.entries(bio.contact || {}).flatMap(([type, entries]) =>
     entries.map((entry) => {
       const href = type === 'email' ? `mailto:${entry.content}` : type === 'phone' ? `tel:${entry.content.replace(/\s/g, '')}` : entry.content;
-      return el('li', {}, el('a', { href, rel: 'noopener', target: type === 'email' || type === 'phone' ? null : '_blank' }, [icon(type), el('span', { text: entry.title })]));
+      return el('li', { class: type }, el('a', { href, rel: 'noopener', 'aria-label': entry.title, target: type === 'email' || type === 'phone' ? null : '_blank' }, [icon(type), el('span', { text: entry.title })]));
     }));
-  if (bio.location) links.unshift(el('li', { class: 'static' }, [icon('location'), el('span', { text: bio.location })]));
+  if (bio.location) links.unshift(el('li', { class: 'static location' }, [icon('location'), el('span', { text: bio.location })]));
 
   const email = bio.contact?.email?.[0];
   const actions = [
@@ -100,13 +100,15 @@ export function renderFeatured({ featured }) {
   ]);
   document.getElementById('featured').append(
     el('div', { class: 'wrap featured-grid' }, [
-      el('div', { class: 'featured-text' }, [
+      el('div', { class: 'featured-head' }, [
         el('p', { class: 'kicker', text: featured.kicker }),
         el('h2', { text: featured.title }),
+      ]),
+      el('div', { class: 'bars reveal' }, [bar(before, 'before'), bar(after, 'after')]),
+      el('div', { class: 'featured-body' }, [
         el('p', { text: featured.text }),
         featured.footnote && el('p', { class: 'footnote', text: featured.footnote }),
       ]),
-      el('div', { class: 'bars reveal' }, [bar(before, 'before'), bar(after, 'after')]),
     ]),
   );
 }
@@ -120,6 +122,7 @@ export function renderReferences({ references }) {
       el('blockquote', { text: ref.excerpt || ref.blurb }),
       el('figcaption', {}, [el('strong', { text: ref.author.name }), el('span', { text: `${ref.author.position}, ${ref.author.organisation}` }), el('time', { text: ref.author.friendlyDate })]),
     ]))),
+    picks.length > 1 && el('p', { class: 'swipe-hint', 'aria-hidden': 'true', text: 'Swipe for more →' }),
     el('details', { class: 'all-quotes' }, [
       el('summary', { text: `Read all ${references.length} endorsements` }),
       el('div', { class: 'quote-list' }, references.map((ref) => el('figure', { class: 'quote' }, [

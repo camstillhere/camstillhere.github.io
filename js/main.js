@@ -5,6 +5,7 @@ import {
   renderSkills, renderExperience, renderEducation, renderFooter,
 } from './render.js';
 import { renderCharts } from './charts.js';
+import { el } from './render.js';
 
 function observeReveals() {
   const targets = document.querySelectorAll('.reveal');
@@ -13,6 +14,32 @@ function observeReveals() {
     if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
   }), { threshold: 0.12 });
   targets.forEach((t) => observer.observe(t));
+}
+
+function setupNav() {
+  const links = [...document.querySelectorAll('.topbar nav a')].filter((a) => !a.hidden);
+  const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+  const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    const link = byId.get(entry.target.id);
+    links.forEach((l) => l.removeAttribute('aria-current'));
+    link.setAttribute('aria-current', 'true');
+    const nav = link.parentElement;
+    nav.scrollTo({ left: link.offsetLeft - (nav.clientWidth - link.clientWidth) / 2, behavior: 'smooth' });
+  }), { rootMargin: '-30% 0px -65% 0px' });
+  byId.forEach((_, id) => { const section = document.getElementById(id); if (section && !section.hidden) observer.observe(section); });
+}
+
+function setupDock(resume, branding) {
+  const email = resume.bio.contact?.email?.[0];
+  const actions = [
+    branding.cta && el('a', { class: 'button primary', href: branding.cta.href, target: '_blank', rel: 'noopener', text: branding.cta.label }),
+    email && el('a', { class: 'button ghost', href: `mailto:${email.content}`, text: 'Email' }),
+  ].filter(Boolean);
+  if (!actions.length) return;
+  const dock = el('div', { class: 'dock', 'aria-label': 'Quick contact' }, actions);
+  document.body.append(dock);
+  new IntersectionObserver(([entry]) => dock.classList.toggle('show', !entry.isIntersecting)).observe(document.getElementById('hero'));
 }
 
 function setupControls(resume) {
@@ -71,6 +98,8 @@ async function start() {
     setupControls(resume);
     if (show.charts) renderCharts(resume);
     observeReveals();
+    setupNav();
+    setupDock(resume, branding);
   } catch (err) {
     console.error(err);
     const box = document.getElementById('error');

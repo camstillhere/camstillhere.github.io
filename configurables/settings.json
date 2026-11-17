@@ -1,0 +1,13 @@
+{
+	"config": "https://raw.githubusercontent.com/camstillhere/Resume-Resources/main/configurables/config.json",
+	"branding": {
+		"theme": "auto",
+		"fonts": { "body": "Inter", "heading": "Space Grotesk" },
+		"colors": {
+			"primary": "#4f46e5",
+			"accent": "#06b6d4"
+		},
+		"hero": "gradient",
+		"footer": "Built from a single config.json. Fork it and make it yours."
+	}
+}

@@ -2,17 +2,10 @@
 	"config": "https://raw.githubusercontent.com/camstillhere/Resume-Resources/main/configurables/config.json",
 	"branding": {
 		"theme": "auto",
-		"fonts": { "body": "Inter", "heading": "Space Grotesk" },
-		"colors": {
-			"primary": "#1e3a8a",
-			"accent": "#0e7490",
-			"dark": { "primary": "#3b82f6", "accent": "#22d3ee" }
-		},
+		"fonts": { "body": "Inter", "heading": "Newsreader" },
 		"hero": "gradient",
 		"cta": { "label": "Connect on LinkedIn", "href": "https://www.linkedin.com/in/cameronstiller/" },
-		"detailSwitcher": false,
-		"defaultDetail": 2,
-		"collapseOlderThanYears": 10,
+		"expandedRoles": 2,
 		"sections": { "charts": false },
 		"footer": null
 	}

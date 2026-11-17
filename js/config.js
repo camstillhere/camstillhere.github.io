@@ -6,32 +6,35 @@ export const DEFAULT_SETTINGS = {
     siteTitle: null,
     favicon: null,
     theme: 'auto',
-    fonts: { body: 'Inter', heading: 'Space Grotesk' },
+    fonts: { body: 'Inter', heading: 'Newsreader' },
     colors: {
-      primary: '#4f46e5',
-      accent: '#06b6d4',
-      background: '#f4f6fb',
+      primary: '#14284b',
+      accent: '#8a6a2b',
+      ink: '#0b1424',
+      background: '#f3f4f6',
       surface: '#ffffff',
-      text: '#1b2033',
-      muted: '#5b6478',
+      text: '#171e2e',
+      muted: '#586174',
       dark: {
-        primary: '#818cf8',
-        accent: '#22d3ee',
-        background: '#0d1117',
-        surface: '#161b27',
-        text: '#e6e9f2',
-        muted: '#9aa3b8',
+        primary: '#9db8ee',
+        accent: '#d2b36f',
+        ink: '#060b14',
+        background: '#0c121d',
+        surface: '#131a28',
+        text: '#e8ebf2',
+        muted: '#9aa4b8',
       },
     },
     hero: 'gradient',
     heroImage: null,
     footer: null,
     cta: null,
-    detailSwitcher: true,
-    defaultDetail: 3,
-    collapseOlderThanYears: 10,
-    sections: { stats: true, principles: true, proofPoints: true, skills: true, charts: true, experience: true, education: true, references: true },
-    chartPalette: ['#4f46e5', '#06b6d4', '#f59e0b', '#10b981', '#ec4899', '#8b5cf6', '#ef4444', '#14b8a6', '#f97316', '#3b82f6'],
+    expandedRoles: 2,
+    sections: {
+      stats: true, featured: true, proofPoints: true, principles: true, skills: true,
+      charts: true, experience: true, education: true, references: true,
+    },
+    chartPalette: ['#14284b', '#8a6a2b', '#2f7f79', '#7a3b52', '#4b6a9b', '#b4883a', '#3c5a46', '#6b4f9e', '#9b4a3a', '#5d6678'],
   },
 };
 
@@ -113,9 +116,6 @@ export function normalise(raw, branding) {
 
   const experiences = normaliseGroup(raw.experiences || [], organisations, 'positions')
     .sort((a, b) => b.period.end - a.period.end || b.period.start - a.period.start);
-  const cutoff = new Date();
-  cutoff.setFullYear(cutoff.getFullYear() - branding.collapseOlderThanYears);
-  experiences.forEach((org) => { org.older = !org.period.current && org.period.end < cutoff; });
   const educations = normaliseGroup(raw.educations || [], organisations, 'certifications')
     .sort((a, b) => b.period.end - a.period.end);
   educations.forEach((org) => org.certifications.forEach((c) => { c.qualification = titleCase(c.qualification); }));
@@ -143,8 +143,10 @@ export function normalise(raw, branding) {
     educations,
     references,
     organisations,
+    featured: raw.featured,
     principles: raw.principles,
     proofPoints: raw.proofPoints,
+    talks: raw.talks,
     skills: raw.skills,
     stats: bio.highlights || [
       { value: years, label: 'Years in tech' },

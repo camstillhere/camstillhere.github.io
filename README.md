@@ -19,20 +19,23 @@ You can also try any config without editing files: `index.html?config=https://ex
 
 ## Résumé data (`config.json`)
 
+Only `bio`, `overview`, `experiences` and `organisations` are needed. Every other section appears when its data is present.
+
 | Key | Purpose |
 | --- | --- |
-| `bio` | `first`, `last`, `title`, optional `tagline`, `image`, and `contact` groups (`email`, `linkedIn`, `github`, `website`, optional `phone`), each a list of `{content, title}`. |
-| `bio` extras | Optional `location` and `highlights` (`[{value, label}]`) replace the default headline numbers. |
-| `principles`, `proofPoints`, `skills` | Optional sections: `{title, items}` for the first two (proof points are `{title, text}`), and `{title, groups:[{name, items}]}` for skills. |
-| `overview` | `title` and `blurb` paragraphs. `{{years}}` is replaced with your years of experience. |
+| `bio` | `first`, `last`, `title`, optional `tagline`, `location`, `image`, `highlights` (`[{value, label}]`, the headline numbers), and `contact` groups (`email`, `linkedIn`, `github`, `website`, optional `phone`), each a list of `{content, title}`. |
+| `overview` | `title` and `blurb` paragraphs. The first is shown as a lead. `{{years}}` becomes your years of experience. |
+| `featured` | One signature result: `kicker`, `title`, `text`, `footnote`, and `before` / `after` (`label`, `display`, numeric `value` used to scale the bars). |
+| `references` | `author` (`name`, `position`, `organisation`, `date`) and `blurb`. Add `featured: true` and a short `excerpt` (a quote from the blurb) to pull a quote to the top; otherwise the three newest are used. |
+| `proofPoints` | `{title, items: [{title, text}]}`. |
+| `talks` | `{title, items: [{title, text}]}` shown beneath the proof points. |
+| `principles` | `{title, items: ["..."]}`. |
+| `skills` | `{title, groups: [{name, items: ["..."]}]}`. |
 | `experiences` | One entry per organisation with `positions` (`title`, `span.start`, `span.end`, `blurb`, `responsibilities`, `achievements`). A `null` end means current. |
 | `educations` | One entry per institute with `certifications` (`qualification`, `title`, `span`, `blurb`). |
-| `references` | Endorsements: `author` (`name`, `position`, `organisation`, `date`) and `blurb`. |
 | `organisations` | Lookup by name: `blurb`, `link`, `icon`. Every organisation used above should appear here. |
 
-Dates use `YYYY-MM-DD`. Leave out anything you do not want shown; empty sections simply do not render.
-
-Think twice before publishing a phone number: public pages are scraped. The `phone` contact type is supported but optional, and nothing is shown unless you add it.
+Dates use `YYYY-MM-DD`. Think twice before publishing a phone number: public pages are scraped. The `phone` contact type is supported but optional, and nothing is shown unless you add it.
 
 ## Branding (`settings.json`)
 
@@ -45,29 +48,31 @@ Everything is optional; omitted values fall back to the defaults in [`js/config.
     "siteTitle": "Jane Doe | Engineer",
     "favicon": "img/favicon.png",
     "theme": "auto",
-    "fonts": { "body": "Inter", "heading": "Space Grotesk" },
+    "fonts": { "body": "Inter", "heading": "Newsreader" },
     "colors": {
-      "primary": "#0f766e",
-      "accent": "#f59e0b",
-      "dark": { "primary": "#2dd4bf" }
+      "primary": "#14284b",
+      "accent": "#8a6a2b",
+      "ink": "#0b1424",
+      "dark": { "accent": "#d2b36f" }
     },
     "hero": "gradient",
     "heroImage": null,
-    "footer": "Open to new opportunities",
-    "sections": { "stats": true, "charts": true, "experience": true, "education": true, "references": true },
-    "chartPalette": ["#0f766e", "#f59e0b", "#6366f1"]
+    "cta": { "label": "Connect on LinkedIn", "href": "https://www.linkedin.com/in/example/" },
+    "expandedRoles": 2,
+    "footer": null,
+    "sections": { "charts": false },
+    "chartPalette": ["#14284b", "#8a6a2b", "#2f7f79"]
   }
 }
 ```
 
 - `theme`: `auto` follows the visitor's system, or force `light` / `dark`.
 - `fonts`: any [Google Fonts](https://fonts.google.com) family name.
-- `hero`: `gradient`, `solid`, or set `heroImage` for a background photo.
-- `colors`: `primary`, `accent`, `background`, `surface`, `text`, `muted`. The nested `dark` object overrides them in dark mode.
-- `sections`: switch whole sections off (`stats`, `principles`, `proofPoints`, `skills`, `charts`, `experience`, `education`, `references`).
-- `cta`: `{label, href}` adds a button to the hero.
-- `detailSwitcher` and `defaultDetail` (0 to 3): show or hide the Brief/Full switcher and pick the starting level.
-- `collapseOlderThanYears`: employers that ended longer ago are collapsed by default.
+- `colors`: `primary` (links), `accent` (rules and highlights), `ink` (hero and feature band), `background`, `surface`, `text`, `muted`. The nested `dark` object overrides them in dark mode.
+- `hero`: `gradient` or `solid`; set `heroImage` for a background photo.
+- `cta`: adds a primary button to the hero.
+- `expandedRoles`: how many of the most recent roles start expanded; the rest open on click.
+- `sections`: switch sections off (`stats`, `featured`, `references`, `proofPoints`, `principles`, `skills`, `charts`, `experience`, `education`). Charts are off by default in this site's settings.
 
 ## Layout
 
@@ -79,8 +84,8 @@ js/config.js          settings, loading and normalising the résumé
 js/dates.js           date and duration helpers
 js/branding.js        applies colours, fonts and theme
 js/render.js          builds the page sections
-js/charts.js          Chart.js overview charts
+js/charts.js          optional Chart.js overview charts
 configurables/        settings.json, config.example.json (and your config.json)
 ```
 
-The page has a detail switcher (Brief to Full), light/dark toggle, and a print stylesheet so the browser's "Save as PDF" gives a clean document.
+There is a light/dark toggle and a print stylesheet that expands every role, so the browser's "Save as PDF" gives a complete, clean document.

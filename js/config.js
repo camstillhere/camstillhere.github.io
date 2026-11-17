@@ -29,6 +29,7 @@ export const DEFAULT_SETTINGS = {
     heroImage: null,
     footer: null,
     cta: null,
+    cvButton: 'Download CV (PDF)',
     expandedRoles: 2,
     sections: {
       stats: true, featured: true, proofPoints: true, principles: true, skills: true,

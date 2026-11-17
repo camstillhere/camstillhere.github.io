@@ -65,6 +65,7 @@ export function renderHero(resume, branding) {
   const actions = [
     branding.cta && el('a', { class: 'button primary', href: branding.cta.href, target: '_blank', rel: 'noopener', text: branding.cta.label }),
     email && el('a', { class: 'button ghost', href: `mailto:${email.content}`, text: 'Send an email' }),
+    branding.cvButton && el('button', { class: 'button ghost', type: 'button', 'data-print': '', text: branding.cvButton }),
   ];
 
   document.getElementById('heroGrid').append(
@@ -157,12 +158,12 @@ function renderRole(position, open) {
   const hasBody = position.blurb.length || position.achievements.length || position.responsibilities.length;
   const heading = [el('h4', { text: position.title }), el('span', { class: 'dates', text: `${position.period.label} · ${position.period.duration}` })];
   if (!hasBody) return el('div', { class: 'role plain' }, el('div', { class: 'role-head' }, heading));
-  return el('details', { class: 'role', open: open ? '' : null }, [
+  return el('details', { class: `role${open ? ' lead' : ''}`, open: open ? '' : null }, [
     el('summary', { class: 'role-head' }, heading),
     el('div', { class: 'role-body' }, [
       ...position.blurb.map((p) => el('p', { text: p })),
       position.achievements.length > 0 && list(position.achievements, 'points'),
-      position.responsibilities.length > 0 && el('div', {}, [el('h5', { text: 'Responsibilities' }), list(position.responsibilities, 'points')]),
+      position.responsibilities.length > 0 && el('div', { class: 'resp' }, [el('h5', { text: 'Responsibilities' }), list(position.responsibilities, 'points')]),
     ]),
   ]);
 }

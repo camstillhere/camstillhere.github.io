@@ -60,7 +60,7 @@ a { color: var(--primary); text-underline-offset: 3px; }
 .button:hover { transform: translateY(-1px); }
 .button.primary { background: var(--accent-bright); color: #0b1424; }
 .button.primary:hover { background: color-mix(in srgb, var(--accent-bright) 85%, #fff); }
-.button.ghost { color: #fff; border: 1px solid rgb(255 255 255 / .35); }
+.button.ghost { color: #fff; background: transparent; border: 1px solid rgb(255 255 255 / .35); font-family: inherit; line-height: inherit; cursor: pointer; }
 .button.ghost:hover { border-color: #fff; }
 .meta { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px; }
 .meta li { display: inline-flex; align-items: center; gap: 7px; color: rgb(255 255 255 / .72); }
@@ -146,7 +146,11 @@ summary::-webkit-details-marker { display: none; }
 .skill-group { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
 .skill-group h3 { font: 600 12px var(--font-body); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
 .skill-group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.skill-group li { padding: 5px 13px; border: 1px solid var(--border); border-radius: 6px; font-size: 14.5px; background: var(--surface); }
+.skill-group li {
+  padding: 6px 14px; border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: 4px 8px 8px 4px;
+  font-size: 14.5px; font-weight: 500; background: var(--surface); transition: transform .15s, border-color .15s;
+}
+.skill-group li:hover { transform: translateY(-1px); border-color: var(--accent); }
 
 .org { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); padding: 34px 0; border-top: 1px solid var(--border); }
 .org:first-child { border-top: 0; padding-top: 0; }
@@ -219,7 +223,9 @@ details.edu[open] > summary h3::after { content: "−"; }
   .edu-detail { padding-left: 0; }
 }
 
+@page { size: A4; margin: 14mm; }
 @media print {
+  details:not([open])::details-content { content-visibility: visible; display: block; }
   .topbar, .controls, .actions, .bars .bar-track, #charts { display: none !important; }
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.5; }
   .hero, .band { background: none !important; color: #000; }
@@ -234,4 +240,51 @@ details.edu[open] > summary h3::after { content: "−"; }
   .reveal { opacity: 1 !important; transform: none !important; }
   .role, .row, .pull, .quote, .edu { break-inside: avoid; }
   details > summary::after, .role-head h4::after, .edu h3::after { display: none !important; }
+
+  .resp, .all-quotes, .edu-detail { display: none; }
+  .role:not(.lead) .role-body { display: none; }
+  .hero h1 { font-size: 2.6rem; }
+  .eyebrow { margin-bottom: 6px; }
+  .tagline { font-size: 1.1rem; margin: 8px 0 10px; }
+  .meta { gap: 4px 16px; font-size: 12px; }
+  .stat { padding: 8px 12px; }
+  .stat strong { font-size: 1.6rem; }
+  .stat span { margin-top: 4px; font-size: 11px; }
+  .band p, .row p { font-size: .9rem; max-width: none; }
+  .skill-group li { padding: 2px 9px; font-size: .8rem; }
+  .skill-group ul { gap: 5px; }
+  .edu-main { grid-template-columns: 50px 1fr; padding: 4px 0; }
+  .edu-main > div { display: flex; gap: 10px; align-items: baseline; }
+  .edu h3 { font-size: .95rem; }
+  .edu p { margin: 0; font-size: 12px; }
+  .block-grid, .featured-grid, .org, .row, .skill-group, .principles, .talks, .quote-list, .pull-quotes { display: block; }
+  .org-header { display: flex; flex-direction: row; align-items: center; margin-bottom: 6px; }
+  .pull { display: block; margin-bottom: 10px; }
+  .pull-quotes figure { page-break-inside: avoid; }
+  .skill-group ul { margin-top: 4px; }
+  .edu-main { display: grid; }
+  .block-head h2 { font-size: 1.35rem; }
+  .block-head .kicker { margin-bottom: 4px; }
+  .block { padding: 14px 0; }
+  .band { padding: 14px 0; }
+  .featured-grid { grid-template-columns: 1fr; gap: 6px; }
+  .band h2 { font-size: 1.35rem; margin-bottom: 6px; }
+  #overview .lead { font-size: 1.05rem; }
+  .pull-quotes { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .pull blockquote { font-size: .9rem; }
+  .row { padding: 10px 0; gap: 16px; }
+  .row h3 { font-size: 1.05rem; }
+  .subhead { margin: 18px 0 6px; font-size: 1.1rem; }
+  .principles li { padding: 8px 0; }
+  .principles p { font-size: 1rem; }
+  .skill-group { padding: 8px 0; }
+  .org { grid-template-columns: 150px 1fr; padding: 14px 0; gap: 16px; }
+  .logo { width: 36px; height: 36px; }
+  .org-title h3 { font-size: 1.1rem; }
+  .role-head { padding: 8px 0; }
+  .role-head h4 { font-size: 1rem; }
+  .role-body { padding-bottom: 8px; }
+  .points li { margin-bottom: 3px; }
+  .edu-main { padding: 7px 0; }
+  .footer { padding: 14px 0; }
 }

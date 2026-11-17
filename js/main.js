@@ -17,7 +17,11 @@ function observeReveals() {
 
 function setupControls(resume) {
   document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-  document.getElementById('printButton').addEventListener('click', () => window.print());
+  document.querySelectorAll('#printButton, [data-print]').forEach((b) => b.addEventListener('click', () => window.print()));
+
+  const pageTitle = document.title;
+  window.addEventListener('beforeprint', () => { document.title = `${resume.bio.first} ${resume.bio.last} - CV`; });
+  window.addEventListener('afterprint', () => { document.title = pageTitle; });
   document.addEventListener('themechange', () => renderCharts(resume));
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => renderCharts(resume));
 

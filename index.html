@@ -1,76 +1,54 @@
-<html>
-<!-- This site was designed by Cameron Stiller for Cameron Stiller, all rights belong to him.  However others are permitted to clone this repository or provide a config.json of their own. -->
+<!doctype html>
+<html lang="en">
 <head>
-	<title>Cameron Stiller</title>
-	<script type="text/javascript" src="js/resume.js?1"></script>
-	<script type="text/javascript" src="js/app.js?1"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.js"></script>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/resume.css">
-	<meta name="description" content="This Resume is provided with a config.json and displays it in a standard template." />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Résumé</title>
+	<meta name="description" content="An online résumé rendered from a single config.json, with configurable branding.">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+	<script type="module" src="js/main.js"></script>
 </head>
-<body>
-<div id="mainPage" class="detail-level-3">
-	<div id="rightSide">
-		<div id="profileContainer">
-			<div id="profilePic"></div>
-			<div id="profileName"><span id="bio-first"></span> <span id="bio-last"></span></div>
-			<div id="profileTitle"></div>
+<body data-detail="3">
+	<header class="topbar">
+		<nav aria-label="Sections">
+			<a href="#overview">Overview</a>
+			<a href="#experience" id="nav-experience">Experience</a>
+			<a href="#education" id="nav-education">Education</a>
+			<a href="#references" id="nav-references">Endorsements</a>
+		</nav>
+		<div class="controls">
+			<div class="segmented" role="group" aria-label="Level of detail">
+				<button data-detail="0" aria-pressed="false" title="Roles only">Brief</button>
+				<button data-detail="1" aria-pressed="false">Summary</button>
+				<button data-detail="2" aria-pressed="false">Highlights</button>
+				<button data-detail="3" aria-pressed="true">Full</button>
+			</div>
+			<button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">◐</button>
+			<button id="printButton" class="icon-button" aria-label="Print or save as PDF">⎙</button>
 		</div>
-		<div id="contactSection">
-			<ul id="contactDetails">
-			</ul>
-		</div>
-		<div id="scrollContainer">
-		</div>
-	</div>
-	<div id="paper">
-		<div id="Settings">
-			<label>
-			  <input type="radio" name="setting" value="0">
-			  <img src="img/detailLevel/hot_drink_style/0.svg" onclick="adjustDetail(0)">
-			</label>
-			<label>
-			  <input type="radio" name="setting" value="1">
-			  <img src="img/detailLevel/hot_drink_style/1.svg" onclick="adjustDetail(1)">
-			</label>
-			<label>
-			  <input type="radio" name="setting" value="2">
-			  <img src="img/detailLevel/hot_drink_style/2.svg" onclick="adjustDetail(2)">
-			</label>
-			<label>
-			  <input type="radio" name="setting" value="3" checked>
-			  <img src="img/detailLevel/hot_drink_style/3.svg" onclick="adjustDetail(3)">
-			</label>
-			<label>
-			  <input type="radio" name="setting" value="chart">
-			  <img src="img/detailLevel/chart.svg" onclick="adjustDetail('chart')">
-			</label>
-		</div>
-		<h1 id="charts">Overview</h1>
-		<div class="chartContainer">
-			<canvas id="experienceChart"></canvas>
-		</div>
-		<div class="chartContainer">
-			<canvas id="tenureChart"></canvas>
-		</div>
-		<div class="chartContainer">
-			<canvas id="educationChart"></canvas>
-		</div>
-		<div class="chartContainer">
-			<canvas id="referenceChart"></canvas>
-		</div>
-		<h1 class="summary" id="overview-title">Overview</h1>
-		<ul class="blurb" id="overview-blurb"></ul>
-		<div id="experiencesWrapper" class="wrapper">
-			<h1 class="experiences">Experiences</h1>
-		</div>
-		<div id="educationsWrapper" class="wrapper">
-			<h1 class="educations">Education</h1>
-		</div>
-	</div>
-	
-</div>
+	</header>
+
+	<section id="hero" class="hero"></section>
+	<div id="stats" class="stats"></div>
+
+	<main>
+		<p id="error" class="error" role="alert" hidden></p>
+		<section id="overview" class="panel reveal"></section>
+		<section id="charts" class="panel reveal" hidden>
+			<h2>At a glance</h2>
+			<div class="chart-grid">
+				<div class="chart"><canvas id="chartExperience"></canvas></div>
+				<div class="chart"><canvas id="chartTenure"></canvas></div>
+				<div class="chart"><canvas id="chartEducation"></canvas></div>
+				<div class="chart"><canvas id="chartReferences"></canvas></div>
+			</div>
+		</section>
+		<section id="experience" class="panel"></section>
+		<section id="education" class="panel"></section>
+		<section id="references" class="panel"></section>
+	</main>
+
+	<footer id="footer" class="footer"></footer>
 </body>
 </html>

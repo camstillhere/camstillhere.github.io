@@ -30,6 +30,7 @@ export const DEFAULT_SETTINGS = {
     footer: null,
     cta: null,
     cvButton: 'Download CV (PDF)',
+    card: true,
     expandedRoles: 2,
     sections: {
       stats: true, featured: true, proofPoints: true, principles: true, skills: true,
